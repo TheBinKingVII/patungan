@@ -45,7 +45,7 @@ class AppTheme {
       backgroundColor: primaryColor,
       foregroundColor: Colors.white,
       centerTitle: true,
-      titleTextStyle: GoogleFonts.poppins(
+      titleTextStyle: GoogleFonts.montserrat(
         fontSize: 20,
         fontWeight: FontWeight.w600,
         color: Colors.white,
@@ -60,7 +60,7 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
-        textStyle: GoogleFonts.poppins(
+        textStyle: GoogleFonts.montserrat(
           fontSize: 14,
           fontWeight: FontWeight.w500,
         ),
@@ -81,11 +81,11 @@ class AppTheme {
         borderRadius: BorderRadius.circular(8),
         borderSide: const BorderSide(color: primaryColor),
       ),
-      labelStyle: GoogleFonts.poppins(
+      labelStyle: GoogleFonts.montserrat(
         fontSize: 14,
         color: textColor.withOpacity(0.7),
       ),
-      hintStyle: GoogleFonts.poppins(
+      hintStyle: GoogleFonts.montserrat(
         fontSize: 14,
         color: textColor.withOpacity(0.5),
       ),
@@ -96,78 +96,78 @@ class AppTheme {
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     ),
-    textTheme: GoogleFonts.poppinsTextTheme().copyWith(
-      displayLarge: GoogleFonts.poppins(
+    textTheme: GoogleFonts.montserratTextTheme().copyWith(
+      displayLarge: GoogleFonts.montserrat(
         fontSize: 57,
         fontWeight: FontWeight.w400,
         color: textColor,
       ),
-      displayMedium: GoogleFonts.poppins(
+      displayMedium: GoogleFonts.montserrat(
         fontSize: 45,
         fontWeight: FontWeight.w400,
         color: textColor,
       ),
-      displaySmall: GoogleFonts.poppins(
+      displaySmall: GoogleFonts.montserrat(
         fontSize: 36,
         fontWeight: FontWeight.w400,
         color: textColor,
       ),
-      headlineLarge: GoogleFonts.poppins(
+      headlineLarge: GoogleFonts.montserrat(
         fontSize: 32,
         fontWeight: FontWeight.w400,
         color: textColor,
       ),
-      headlineMedium: GoogleFonts.poppins(
+      headlineMedium: GoogleFonts.montserrat(
         fontSize: 28,
         fontWeight: FontWeight.w400,
         color: textColor,
       ),
-      headlineSmall: GoogleFonts.poppins(
+      headlineSmall: GoogleFonts.montserrat(
         fontSize: 24,
         fontWeight: FontWeight.w400,
         color: textColor,
       ),
-      titleLarge: GoogleFonts.poppins(
+      titleLarge: GoogleFonts.montserrat(
         fontSize: 22,
         fontWeight: FontWeight.w500,
         color: textColor,
       ),
-      titleMedium: GoogleFonts.poppins(
+      titleMedium: GoogleFonts.montserrat(
         fontSize: 16,
         fontWeight: FontWeight.w500,
         color: textColor,
       ),
-      titleSmall: GoogleFonts.poppins(
+      titleSmall: GoogleFonts.montserrat(
         fontSize: 14,
         fontWeight: FontWeight.w500,
         color: textColor,
       ),
-      bodyLarge: GoogleFonts.poppins(
+      bodyLarge: GoogleFonts.montserrat(
         fontSize: 16,
         fontWeight: FontWeight.w400,
         color: textColor,
       ),
-      bodyMedium: GoogleFonts.poppins(
+      bodyMedium: GoogleFonts.montserrat(
         fontSize: 14,
         fontWeight: FontWeight.w400,
         color: textColor,
       ),
-      bodySmall: GoogleFonts.poppins(
+      bodySmall: GoogleFonts.montserrat(
         fontSize: 12,
         fontWeight: FontWeight.w400,
         color: textColor,
       ),
-      labelLarge: GoogleFonts.poppins(
+      labelLarge: GoogleFonts.montserrat(
         fontSize: 14,
         fontWeight: FontWeight.w500,
         color: textColor,
       ),
-      labelMedium: GoogleFonts.poppins(
+      labelMedium: GoogleFonts.montserrat(
         fontSize: 12,
         fontWeight: FontWeight.w500,
         color: textColor,
       ),
-      labelSmall: GoogleFonts.poppins(
+      labelSmall: GoogleFonts.montserrat(
         fontSize: 11,
         fontWeight: FontWeight.w500,
         color: textColor,
@@ -198,7 +198,7 @@ class AppTheme {
       backgroundColor: darkSurfaceColor,
       foregroundColor: darkTextColor,
       centerTitle: true,
-      titleTextStyle: GoogleFonts.poppins(
+      titleTextStyle: GoogleFonts.montserrat(
         fontSize: 20,
         fontWeight: FontWeight.w600,
         color: darkTextColor,
@@ -213,7 +213,7 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
-        textStyle: GoogleFonts.poppins(
+        textStyle: GoogleFonts.montserrat(
           fontSize: 14,
           fontWeight: FontWeight.w500,
         ),
@@ -234,11 +234,11 @@ class AppTheme {
         borderRadius: BorderRadius.circular(8),
         borderSide: const BorderSide(color: darkPrimaryColor),
       ),
-      labelStyle: GoogleFonts.poppins(
+      labelStyle: GoogleFonts.montserrat(
         fontSize: 14,
         color: darkTextColor.withOpacity(0.7),
       ),
-      hintStyle: GoogleFonts.poppins(
+      hintStyle: GoogleFonts.montserrat(
         fontSize: 14,
         color: darkTextColor.withOpacity(0.5),
       ),
@@ -250,79 +250,79 @@ class AppTheme {
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     ),
-    textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme)
+    textTheme: GoogleFonts.montserratTextTheme(ThemeData.dark().textTheme)
         .copyWith(
-          displayLarge: GoogleFonts.poppins(
+          displayLarge: GoogleFonts.montserrat(
             fontSize: 57,
             fontWeight: FontWeight.w400,
             color: darkTextColor,
           ),
-          displayMedium: GoogleFonts.poppins(
+          displayMedium: GoogleFonts.montserrat(
             fontSize: 45,
             fontWeight: FontWeight.w400,
             color: darkTextColor,
           ),
-          displaySmall: GoogleFonts.poppins(
+          displaySmall: GoogleFonts.montserrat(
             fontSize: 36,
             fontWeight: FontWeight.w400,
             color: darkTextColor,
           ),
-          headlineLarge: GoogleFonts.poppins(
+          headlineLarge: GoogleFonts.montserrat(
             fontSize: 32,
             fontWeight: FontWeight.w400,
             color: darkTextColor,
           ),
-          headlineMedium: GoogleFonts.poppins(
+          headlineMedium: GoogleFonts.montserrat(
             fontSize: 28,
             fontWeight: FontWeight.w400,
             color: darkTextColor,
           ),
-          headlineSmall: GoogleFonts.poppins(
+          headlineSmall: GoogleFonts.montserrat(
             fontSize: 24,
             fontWeight: FontWeight.w400,
             color: darkTextColor,
           ),
-          titleLarge: GoogleFonts.poppins(
+          titleLarge: GoogleFonts.montserrat(
             fontSize: 22,
             fontWeight: FontWeight.w500,
             color: darkTextColor,
           ),
-          titleMedium: GoogleFonts.poppins(
+          titleMedium: GoogleFonts.montserrat(
             fontSize: 16,
             fontWeight: FontWeight.w500,
             color: darkTextColor,
           ),
-          titleSmall: GoogleFonts.poppins(
+          titleSmall: GoogleFonts.montserrat(
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: darkTextColor,
           ),
-          bodyLarge: GoogleFonts.poppins(
+          bodyLarge: GoogleFonts.montserrat(
             fontSize: 16,
             fontWeight: FontWeight.w400,
             color: darkTextColor,
           ),
-          bodyMedium: GoogleFonts.poppins(
+          bodyMedium: GoogleFonts.montserrat(
             fontSize: 14,
             fontWeight: FontWeight.w400,
             color: darkTextColor,
           ),
-          bodySmall: GoogleFonts.poppins(
+          bodySmall: GoogleFonts.montserrat(
             fontSize: 12,
             fontWeight: FontWeight.w400,
             color: darkTextColor,
           ),
-          labelLarge: GoogleFonts.poppins(
+          labelLarge: GoogleFonts.montserrat(
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: darkTextColor,
           ),
-          labelMedium: GoogleFonts.poppins(
+          labelMedium: GoogleFonts.montserrat(
             fontSize: 12,
             fontWeight: FontWeight.w500,
             color: darkTextColor,
           ),
-          labelSmall: GoogleFonts.poppins(
+          labelSmall: GoogleFonts.montserrat(
             fontSize: 11,
             fontWeight: FontWeight.w500,
             color: darkTextColor,
