@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:patungan/core/themes.dart';
-import 'package:patungan/features/auth/presentation/pages/register_page.dart';
+import 'package:patungan/screens/main_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      home: RegisterPage(),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
+      home: MainScreen(),
     );
   }
 }
