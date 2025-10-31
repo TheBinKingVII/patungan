@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:patungan/core/themes.dart';
 import 'package:patungan/screens/main_screen.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
 }
 
@@ -13,9 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
+      theme: AppTheme.lightTheme,
       home: MainScreen(),
     );
   }

@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Color Palette - Blue-Green Gradient Theme
-  static const Color primaryColor = Color(0xFF2F80ED); // Blue primary
-  static const Color secondaryColor = Color(0xFF27AE60); // Green secondary
-  static const Color accentColor = Color(0xFF56CCF2); // Light blue accent
+  static const Color primaryColor = Color(0xFF19385B); // Blue primary
+  static const Color secondaryColor = Color(0xFFE08750); // Green secondary
+  static const Color accentColor = Color(0xFFAA2F6A); // Light blue accent
   static const Color errorColor = Color(0xFFB00020);
   static const Color surfaceColor = Color(0xFFFFFFFF);
   static const Color backgroundColor = Color(0xFFF7FAFC); // Light background
