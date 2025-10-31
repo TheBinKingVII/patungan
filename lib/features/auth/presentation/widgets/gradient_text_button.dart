@@ -5,6 +5,7 @@ class GradientTextButton extends StatelessWidget {
   final String actionText;
   final VoidCallback onTap;
   final bool useGradient; 
+  final Color? color;
 
   const GradientTextButton({
     super.key,
@@ -12,6 +13,7 @@ class GradientTextButton extends StatelessWidget {
     required this.actionText,
     required this.onTap,
     this.useGradient = true,
+    this.color,
   });
 
   @override
@@ -24,6 +26,8 @@ class GradientTextButton extends StatelessWidget {
 
     final textTheme = Theme.of(context).textTheme.labelLarge;
 
+    final Color defaultColor = color ?? const Color(0xFF19395B);
+
     final Widget actionWidget = useGradient
         ? ShaderMask(
             shaderCallback: (bounds) => gradient.createShader(
@@ -32,16 +36,16 @@ class GradientTextButton extends StatelessWidget {
             child: Text(
               actionText,
               style: textTheme?.copyWith(
-                fontWeight: FontWeight.w700,
-                color: Colors.white, // penting biar shader keliatan
+                fontWeight: FontWeight.w900,
+                color: Colors.white, 
               ),
             ),
           )
         : Text(
             actionText,
             style: textTheme?.copyWith(
-              fontWeight: FontWeight.w700,
-              color: const Color(0xFFAA2F6A),
+              fontWeight: FontWeight.w900,
+              color: defaultColor,
             ),
           );
 

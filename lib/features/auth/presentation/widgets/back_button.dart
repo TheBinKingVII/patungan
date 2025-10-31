@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppBackButton extends StatelessWidget {
-  final Color color; // warna ikon
-  final double size; // ukuran ikon
-  final VoidCallback? onPressed; // custom action (opsional)
+  final Color color; 
+  final double size; 
+  final VoidCallback? onPressed; 
 
   const AppBackButton({
     super.key,
@@ -21,7 +21,7 @@ class AppBackButton extends StatelessWidget {
         color: color,
         size: size,
       ),
-      splashRadius: 24, // biar efek tap-nya pas
+      splashRadius: 24,
     );
   }
 }

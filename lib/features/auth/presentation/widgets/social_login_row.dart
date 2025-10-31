@@ -34,7 +34,7 @@ class SocialLoginRow extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 25),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 5,
