@@ -25,8 +25,8 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
+    scaffoldBackgroundColor: Colors.white,
     primaryColor: primaryColor,
-    scaffoldBackgroundColor: backgroundColor,
     colorScheme: const ColorScheme.light(
       primary: primaryColor,
       secondary: secondaryColor,
@@ -66,111 +66,63 @@ class AppTheme {
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: surfaceColor,
+      fillColor: Colors.white,
+      contentPadding: EdgeInsets.symmetric(vertical: 10),
+
+      // Border default
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: Colors.grey.shade300),
+        borderRadius: BorderRadius.circular(30),
+        borderSide: BorderSide(color: Color(0xFF000000)),
       ),
+
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: Colors.grey.shade300),
+        borderRadius: BorderRadius.circular(30),
+        borderSide: BorderSide(color: Color(0x7F19385B), width: 1),
       ),
+
+      // Border saat fokus
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: primaryColor),
+        borderRadius: BorderRadius.circular(30),
+        borderSide: BorderSide(color: Color(0xFFAA2F6A), width: 2),
       ),
-      labelStyle: GoogleFonts.montserrat(
-        fontSize: 14,
-        color: textColor.withOpacity(0.7),
-      ),
-      hintStyle: GoogleFonts.montserrat(
-        fontSize: 14,
-        color: textColor.withOpacity(0.5),
+
+      // Border saat error
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(30),
+        borderSide: BorderSide(color: Color(0xFFE63E6E), width: 1),
       ),
     ),
+
     cardTheme: const CardThemeData(
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     ),
-    textTheme: GoogleFonts.montserratTextTheme().copyWith(
-      displayLarge: GoogleFonts.montserrat(
-        fontSize: 57,
-        fontWeight: FontWeight.w400,
-        color: textColor,
-      ),
-      displayMedium: GoogleFonts.montserrat(
-        fontSize: 45,
-        fontWeight: FontWeight.w400,
-        color: textColor,
-      ),
-      displaySmall: GoogleFonts.montserrat(
-        fontSize: 36,
-        fontWeight: FontWeight.w400,
-        color: textColor,
-      ),
-      headlineLarge: GoogleFonts.montserrat(
-        fontSize: 32,
-        fontWeight: FontWeight.w400,
-        color: textColor,
-      ),
-      headlineMedium: GoogleFonts.montserrat(
-        fontSize: 28,
-        fontWeight: FontWeight.w400,
-        color: textColor,
-      ),
-      headlineSmall: GoogleFonts.montserrat(
-        fontSize: 24,
-        fontWeight: FontWeight.w400,
-        color: textColor,
-      ),
-      titleLarge: GoogleFonts.montserrat(
-        fontSize: 22,
-        fontWeight: FontWeight.w500,
-        color: textColor,
-      ),
-      titleMedium: GoogleFonts.montserrat(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-        color: textColor,
-      ),
-      titleSmall: GoogleFonts.montserrat(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        color: textColor,
-      ),
-      bodyLarge: GoogleFonts.montserrat(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        color: textColor,
-      ),
-      bodyMedium: GoogleFonts.montserrat(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-        color: textColor,
-      ),
-      bodySmall: GoogleFonts.montserrat(
-        fontSize: 12,
-        fontWeight: FontWeight.w400,
-        color: textColor,
-      ),
-      labelLarge: GoogleFonts.montserrat(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        color: textColor,
-      ),
-      labelMedium: GoogleFonts.montserrat(
-        fontSize: 12,
-        fontWeight: FontWeight.w500,
-        color: textColor,
-      ),
-      labelSmall: GoogleFonts.montserrat(
-        fontSize: 11,
-        fontWeight: FontWeight.w500,
-        color: textColor,
-      ),
-    ),
+
+    textTheme: GoogleFonts.montserratTextTheme()
+        .copyWith(
+          displayLarge: GoogleFonts.montserrat(fontWeight: FontWeight.w400),
+          displayMedium: GoogleFonts.montserrat(fontWeight: FontWeight.w400),
+          displaySmall: GoogleFonts.montserrat(fontWeight: FontWeight.w400),
+
+          headlineLarge: GoogleFonts.montserrat(fontWeight: FontWeight.w800),
+          headlineMedium: GoogleFonts.montserrat(fontWeight: FontWeight.w800),
+          headlineSmall: GoogleFonts.montserrat(fontWeight: FontWeight.w700),
+
+          titleLarge: GoogleFonts.montserrat(fontWeight: FontWeight.w500),
+          titleMedium: GoogleFonts.montserrat(fontWeight: FontWeight.w500),
+          titleSmall: GoogleFonts.montserrat(fontWeight: FontWeight.w700),
+
+          bodyLarge: GoogleFonts.montserrat(fontWeight: FontWeight.w600),
+          bodyMedium: GoogleFonts.montserrat(fontWeight: FontWeight.w600),
+          bodySmall: GoogleFonts.montserrat(fontWeight: FontWeight.w600),
+
+          labelLarge: GoogleFonts.montserrat(fontWeight: FontWeight.w500),
+          labelMedium: GoogleFonts.montserrat(fontWeight: FontWeight.w500),
+          labelSmall: GoogleFonts.montserrat(fontWeight: FontWeight.w500),
+        )
+        .apply(bodyColor: Colors.black87, displayColor: Colors.black),
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -246,7 +198,7 @@ class AppTheme {
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     ),
-    textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme)
+    textTheme: GoogleFonts.montserratTextTheme(ThemeData.dark().textTheme)
         .copyWith(
           displayLarge: GoogleFonts.montserrat(
             fontSize: 57,
