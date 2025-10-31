@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:patungan/features/auth/presentation/pages/reset_pass.dart';
+import 'package:patungan/features/auth/presentation/widgets/back_button.dart';
+import 'package:patungan/features/auth/presentation/widgets/elevated_button.dart';
+import 'package:patungan/features/auth/presentation/widgets/form.dart';
 
 class ForgotPass extends StatefulWidget {
   const ForgotPass({super.key});
@@ -9,7 +13,6 @@ class ForgotPass extends StatefulWidget {
 }
 
 class _ForgotPassState extends State<ForgotPass> {
-
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
@@ -30,65 +33,52 @@ class _ForgotPassState extends State<ForgotPass> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Back button
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back, color: Colors.black),
-              ),
+              AppBackButton(),
+
+              // Image
               SizedBox(height: 28),
-              Align(
-                alignment: AlignmentGeometry.topCenter,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25),
                 child: SvgPicture.asset(
                   'assets/images/forgot_password.svg',
-                  // width: screenWidth,
-                  // height: 10,
-                  fit: BoxFit.fitWidth, // atau BoxFit.fitWidth sesuai kebutuhan
+                  fit: BoxFit.fitWidth, 
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  'Forgot Password',
-                  style: Theme.of(context).textTheme.headlineLarge,
+
+              SizedBox(
+                height: 226,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        'Forgot Password',
+                        style: Theme.of(context).textTheme.headlineLarge,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        'Enter the email address associated with your account.',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    CustomTextFormField(hintText: 'Email', prefixIcon: Icons.mail,)
+                  ],
                 ),
               ),
-              SizedBox(height: 20),
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  'Enter the email address associated with your account.',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ),
-              SizedBox(height: 20),
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.only(left: 24, right: 8),
-                    child: Icon(Icons.email, color: Colors.grey),
-                  ),
-                  hintText: 'Email',
-                  hintStyle: Theme.of(
+
+              // Button Continue
+              SizedBox(height: 30),
+              CustomElevatedButton(label: 'Continue', onPressed: () {
+                Navigator.push(
                     context,
-                  ).textTheme.labelLarge?.copyWith(color: Colors.grey),
-                ),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF19395B),
-                  minimumSize: Size(double.infinity, 48),
-                ),
-                onPressed: () {},
-                child: Text(
-                  'Continue',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+                    MaterialPageRoute(builder: (context) => ResetPass()),
+                  );
+              }),
             ],
           ),
         ),

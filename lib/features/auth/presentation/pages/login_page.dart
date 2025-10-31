@@ -4,8 +4,9 @@ import 'package:patungan/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:patungan/features/auth/presentation/widgets/back_button.dart';
 import 'package:patungan/features/auth/presentation/widgets/checkbox.dart';
 import 'package:patungan/features/auth/presentation/widgets/elevated_button.dart';
+import 'package:patungan/features/auth/presentation/widgets/form.dart';
 import 'package:patungan/features/auth/presentation/widgets/gradient_text_button.dart';
-import 'package:patungan/features/auth/presentation/widgets/social_login.dart';
+import 'package:patungan/features/auth/presentation/widgets/social_login_row.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -50,42 +51,19 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               // Form
-              SizedBox(height: 48),
+              SizedBox(height: 40),
               Column(
                 children: [
-                  TextFormField(
+                  CustomTextFormField(
+                    hintText: 'Email',
+                    prefixIcon: Icons.mail,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.only(left: 24, right: 8),
-                        child: Icon(Icons.email, color: Colors.grey),
-                      ),
-                      hintText: 'Email',
-                      hintStyle: Theme.of(
-                        context,
-                      ).textTheme.labelLarge?.copyWith(color: Colors.grey),
-                    ),
                   ),
                   SizedBox(height: 26),
-                  TextFormField(
+                  CustomTextFormField(
+                    hintText: 'Password',
+                    prefixIcon: Icons.lock,
                     obscureText: true,
-                    decoration: InputDecoration(
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.only(left: 24, right: 5),
-                        child: Icon(Icons.lock, color: Colors.grey),
-                      ),
-                      hintText: 'Password',
-                      hintStyle: Theme.of(
-                        context,
-                      ).textTheme.labelLarge?.copyWith(color: Colors.grey),
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.visibility_off, color: Colors.grey),
-                        ),
-                      ),
-                    ),
                   ),
                 ],
               ),
@@ -99,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
 
               // Button Sign in with password
               SizedBox(height: 5),
-              CustomElevatedButton(label: 'Sign up', onPressed: () {}),
+              CustomElevatedButton(label: 'Login', onPressed: () {}),
 
               SizedBox(height: 15),
               GradientTextButton(

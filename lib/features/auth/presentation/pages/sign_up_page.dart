@@ -5,7 +5,7 @@ import 'package:patungan/features/auth/presentation/widgets/checkbox.dart';
 import 'package:patungan/features/auth/presentation/widgets/elevated_button.dart';
 import 'package:patungan/features/auth/presentation/widgets/form.dart';
 import 'package:patungan/features/auth/presentation/widgets/gradient_text_button.dart';
-import 'package:patungan/features/auth/presentation/widgets/social_login.dart';
+import 'package:patungan/features/auth/presentation/widgets/social_login_row.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -50,66 +50,31 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
 
               // Form
-              SizedBox(height: 48),
+              SizedBox(height: 40),
               Column(
                 children: [
-                  const GradientTextFormField(
+                  CustomTextFormField(
                     hintText: 'Username',
                     prefixIcon: Icons.person,
                     keyboardType: TextInputType.text,
                   ),
-                  // TextFormField(
-                  //   decoration: InputDecoration(
-                  //     prefixIcon: Padding(
-                  //       padding: const EdgeInsets.only(left: 24, right: 8),
-                  //       child: Icon(Icons.person, color: Color(0xFF969696)),
-                  //     ),
-                  //     hintText: 'Username',
-                  //     hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  //       color: Colors.grey,
-                  //     ),
-                  //   ),
-                  // ),
                   SizedBox(height: 26),
-                  TextFormField(
+                  CustomTextFormField(
+                    hintText: 'Email',
+                    prefixIcon: Icons.mail,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.only(left: 24, right: 8),
-                        child: Icon(Icons.email, color: Colors.grey),
-                      ),
-                      hintText: 'Email',
-                      hintStyle: Theme.of(
-                        context,
-                      ).textTheme.labelLarge?.copyWith(color: Colors.grey),
-                    ),
                   ),
                   SizedBox(height: 26),
-                  TextFormField(
+                  CustomTextFormField(
+                    hintText: 'Password',
+                    prefixIcon: Icons.lock,
                     obscureText: true,
-                    decoration: InputDecoration(
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.only(left: 24, right: 5),
-                        child: Icon(Icons.lock, color: Colors.grey),
-                      ),
-                      hintText: 'Password',
-                      hintStyle: Theme.of(
-                        context,
-                      ).textTheme.labelLarge?.copyWith(color: Colors.grey),
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.visibility_off, color: Colors.grey),
-                        ),
-                      ),
-                    ),
                   ),
                 ],
               ),
 
               // Checkbox remember me
-              SizedBox(height: 40),
+              SizedBox(height: 20),
               RememberMeCheckbox(
                 value: _isChecked,
                 onChanged: (val) => setState(() => _isChecked = val!),
@@ -118,7 +83,7 @@ class _SignUpPageState extends State<SignUpPage> {
               // Button Sign in
               SizedBox(height: 5),
               CustomElevatedButton(label: 'Sign up', onPressed: () {}),
-              
+
               // Shortcut Auth Login
               SizedBox(height: 62),
               SocialLoginRow(
@@ -127,7 +92,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 onGooglePressed: () {},
                 onApplePressed: () {},
               ),
-              
+
               SizedBox(height: 30),
               GradientTextButton(
                 message: "Already have an account? ",
