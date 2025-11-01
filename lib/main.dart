@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patungan/core/themes.dart';
-import 'package:patungan/screens/main_screen.dart';
-// import 'package:patungan/features/auth/presentation/pages/register_page.dart';
+import 'package:patungan/features/category/presentation/pages/category_page.dart';
+// import 'package:patungan/screens/main_screen.dart';
 
 void main() async {
   runApp(MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
       debugShowCheckedModeBanner: false, 
-      home: MainScreen(),
+      home: CategoryPage(),
     );
   }
 }
