@@ -33,7 +33,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           isDense: true,
           contentPadding: EdgeInsets.symmetric(vertical: 5),
           hintText: widget.hintText,
-          hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
             color: Colors.grey,
             fontWeight: FontWeight.w500,
           ),

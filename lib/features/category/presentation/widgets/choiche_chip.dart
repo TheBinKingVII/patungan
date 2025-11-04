@@ -14,43 +14,32 @@ class CustomChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gradient = const LinearGradient(
-      colors: [Color(0xFF9C27B0), Color(0xFFFF9800)],
+    final gradient = LinearGradient(
+      colors: [Color(0xFFAA2F6A), Color(0xFFD64E56), Color(0xFFEEBE4B)],
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
     );
 
     return InkWell(
       onTap: onSelected,
       borderRadius: BorderRadius.circular(30),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         decoration: BoxDecoration(
           gradient: selected ? gradient : null,
           borderRadius: BorderRadius.circular(30),
-          border: Border.all(color: Colors.black54),
-          color: selected ? null : Colors.white,
-          boxShadow: selected
-              ? [
-                  BoxShadow(
-                    color: Colors.black26,
-                    offset: const Offset(0, 2),
-                    blurRadius: 4,
-                  ),
-                ]
-              : [],
+          color: selected ? null : Colors.grey.shade300,
         ),
         child: Text(
           label,
-          style: TextStyle(
-            color: selected ? Colors.white : Colors.black87,
-            fontWeight: FontWeight.w600,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            color: selected ? Colors.white : Colors.black,
           ),
         ),
       ),
     );
   }
 }
-
-
 
 // import 'package:flutter/material.dart';
 
