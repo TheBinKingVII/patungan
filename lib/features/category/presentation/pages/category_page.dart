@@ -74,6 +74,7 @@ class _CategoryPageState extends State<CategoryPage> {
               // Search Bar
               CustomSearchBar(hintText: 'Cari beras'),
 
+              // Kategori
               const SizedBox(height: 20),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -96,6 +97,7 @@ class _CategoryPageState extends State<CategoryPage> {
                 ),
               ),
 
+              // Grid View
               const SizedBox(height: 20),
               Expanded(
                 child: MasonryGridView.builder(
@@ -103,55 +105,84 @@ class _CategoryPageState extends State<CategoryPage> {
                     crossAxisCount: 2,
                   ),
                   mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
+                  crossAxisSpacing: 6,
                   itemBuilder: (context, index) {
                     return Card(
+                      color: Colors.transparent,
                       elevation: 3,
-                      shadowColor: Colors.black54,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Stack(
-                          children: [
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                    'https://resepkoki.id/wp-content/uploads/2020/03/Resep-Mie-Setan.jpg',
-                                    width: double.infinity,
-                                    height: 100,
-                                    fit: BoxFit.fitWidth,
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Text(
-                                  'Beras Premium Mentik Wangi 10 kg',
-                                  style: Theme.of(context).textTheme.labelSmall
-                                      ?.copyWith(fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: 6),
-                                Text(
-                                  'Rp145.000',
-                                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    fontWeight: FontWeight.w900,
-                                    color: Theme.of(context).colorScheme.tertiary,
-                                  ),
-                                ),
-                                Text(
-                                  'Rp180.000',
-                                  style: Theme.of(context).textTheme.bodySmall
-                                      ?.copyWith(
-                                        decoration: TextDecoration.lineThrough,
+                      shadowColor: Colors.black45,
+                      child: Material(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(12),
+                            splashColor: Colors.grey.shade300,
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Stack(
+                                children: [
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      // Image
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.network(
+                                          'https://resepkoki.id/wp-content/uploads/2020/03/Resep-Mie-Setan.jpg',
+                                          width: double.infinity,
+                                          height: 100,
+                                          fit: BoxFit.fitWidth,
+                                        ),
                                       ),
-                                ),
-                                SizedBox(height: 8),
-                                JoinButton(onPressed: () {}),
-                                SizedBox(height: 6),
-                              ],
+
+                                      // Title
+                                      SizedBox(height: 8),
+                                      Text(
+                                        'Beras Premium Mentik Wangi 10 kg',
+                                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+
+                                      // Main Price
+                                      SizedBox(height: 6),
+                                      Text(
+                                        'Rp145.000',
+                                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                              fontWeight: FontWeight.w900,
+                                              color: Theme.of(
+                                                context,
+                                              ).colorScheme.tertiary,
+                                            ),
+                                      ),
+
+                                      // Discount Price
+                                      Text(
+                                        'Rp180.000',
+                                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                            ),
+                                      ),
+
+                                      // Button
+                                      SizedBox(height: 8),
+                                      JoinButton(onPressed: () {}),
+                                      SizedBox(height: 6),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     );
