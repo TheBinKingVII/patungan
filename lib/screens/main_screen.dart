@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patungan/features/cart/presentation/pages/card_page.dart';
 import 'package:patungan/features/catalog_product/presentation/pages/catalog_page.dart';
-import 'package:patungan/features/category/presentation/pages/category_page.dart';
 import 'package:patungan/features/groupbuy/presentation/pages/groupby_page.dart';
 import 'package:patungan/features/profile/presentation/pages/profile_page.dart';
 
@@ -18,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _optionWidgets = <Widget>[
     CatalogPage(),
     GroupbyPage(),
-    CategoryPage(),
+    CardPage(),
     ProfilePage(),
   ];
 
