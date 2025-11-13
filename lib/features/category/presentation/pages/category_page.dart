@@ -177,6 +177,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                             .textTheme
                                             .bodySmall
                                             ?.copyWith(
+                                              color: Colors.grey.shade700,
                                               decoration:
                                                   TextDecoration.lineThrough,
                                             ),
