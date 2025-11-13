@@ -24,7 +24,7 @@ class CustomChip extends StatelessWidget {
       onTap: onSelected,
       borderRadius: BorderRadius.circular(30),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         decoration: BoxDecoration(
           gradient: selected ? gradient : null,
           borderRadius: BorderRadius.circular(30),
@@ -32,8 +32,9 @@ class CustomChip extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
             color: selected ? Colors.white : Colors.black,
+            fontWeight: FontWeight.w700,
           ),
         ),
       ),

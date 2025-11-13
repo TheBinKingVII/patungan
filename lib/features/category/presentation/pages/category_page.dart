@@ -65,7 +65,6 @@ class _CategoryPageState extends State<CategoryPage> {
           padding: EdgeInsets.only(
             left: 20,
             right: 20,
-            bottom: 0,
             // bottom: MediaQuery.of(context).viewInsets.bottom+,
           ),
           child: Column(
@@ -75,7 +74,7 @@ class _CategoryPageState extends State<CategoryPage> {
               CustomSearchBar(hintText: 'Cari beras'),
 
               // Kategori
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -98,7 +97,7 @@ class _CategoryPageState extends State<CategoryPage> {
               ),
 
               // Grid View
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
               Expanded(
                 child: MasonryGridView.builder(
                   gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
@@ -128,7 +127,8 @@ class _CategoryPageState extends State<CategoryPage> {
                                 children: [
                                   Column(
                                     mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       // Image
                                       ClipRRect(
@@ -145,7 +145,10 @@ class _CategoryPageState extends State<CategoryPage> {
                                       SizedBox(height: 8),
                                       Text(
                                         'Beras Premium Mentik Wangi 10 kg',
-                                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelSmall
+                                            ?.copyWith(
                                               fontWeight: FontWeight.bold,
                                             ),
                                         maxLines: 2,
@@ -156,7 +159,10 @@ class _CategoryPageState extends State<CategoryPage> {
                                       SizedBox(height: 6),
                                       Text(
                                         'Rp145.000',
-                                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge
+                                            ?.copyWith(
                                               fontWeight: FontWeight.w900,
                                               color: Theme.of(
                                                 context,
@@ -167,7 +173,10 @@ class _CategoryPageState extends State<CategoryPage> {
                                       // Discount Price
                                       Text(
                                         'Rp180.000',
-                                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
                                               decoration:
                                                   TextDecoration.lineThrough,
                                             ),
@@ -178,6 +187,47 @@ class _CategoryPageState extends State<CategoryPage> {
                                       JoinButton(onPressed: () {}),
                                       SizedBox(height: 6),
                                     ],
+                                  ),
+
+                                  // Tag
+                                  Align(
+                                    alignment: AlignmentGeometry.centerRight,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                colors: [
+                                                  Color(0xFFAA2F6A),
+                                                  Color(0xFFD64E56),
+                                                  Color(0xFFEEBE4B),
+                                                ],
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                            ),
+                                            child: Text(
+                                              "Only 2 Spots left!",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelSmall
+                                                  ?.copyWith(
+                                                    fontSize: 8,
+                                                    color: Colors.white,
+                                                  ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
