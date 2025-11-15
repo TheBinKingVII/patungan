@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:patungan/features/groupbuy/presentation/widgets/choiche_chip.dart';
-import 'package:patungan/features/groupbuy/presentation/widgets/join_button.dart';
-import 'package:patungan/features/groupbuy/presentation/widgets/search_bar.dart';
+import 'package:patungan/features/category/presentation/widgets/back_button.dart';
+import 'package:patungan/features/category/presentation/widgets/choiche_chip.dart';
+import 'package:patungan/features/category/presentation/widgets/join_button.dart';
+import 'package:patungan/features/category/presentation/widgets/search_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class GroupbyPage extends StatefulWidget {
-  const GroupbyPage({super.key});
+class CategoryPage extends StatefulWidget {
+  const CategoryPage({super.key});
 
   @override
-  State<GroupbyPage> createState() => _GroupbyPageState();
+  State<CategoryPage> createState() => _CategoryPageState();
 }
 
-class _GroupbyPageState extends State<GroupbyPage> {
+class _CategoryPageState extends State<CategoryPage> {
   int selectedIndex = 0;
 
   final List<String> categories = [
-    'Paling Urgent',
-    'Diskon Tertinggi',
-    'Slot Terbanyak',
+    'Most Urgent',
+    'Lowest Price',
+    'Most Popular',
+    'Nearest',
   ];
 
   @override
@@ -25,15 +27,18 @@ class _GroupbyPageState extends State<GroupbyPage> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
+        actionsPadding: EdgeInsets.only(right: 30),
         backgroundColor: Colors.white,
         foregroundColor: Theme.of(context).colorScheme.primary,
-
-        // Search Bar
-        title: CustomSearchBar(hintText: 'Cari patungan murah'),
+        title: Text(
+          'Groceries',
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(),
+        ),
+        leading: Padding(
+          padding: EdgeInsets.only(left: 30),
+          child: CustomBackButton(),
+        ),
         toolbarHeight: 75,
-
-        // Tune Button
-        actionsPadding: EdgeInsets.only(right: 20),
         actions: [
           ElevatedButton(
             onPressed: () {},
@@ -45,7 +50,11 @@ class _GroupbyPageState extends State<GroupbyPage> {
               minimumSize: Size(40, 40),
               elevation: 0,
             ),
-            child: Icon(Icons.tune, size: 20, color: Colors.white),
+            child: Icon(
+              Icons.filter_alt_outlined,
+              size: 20,
+              color: Colors.white,
+            ),
           ),
         ],
       ),
@@ -61,8 +70,11 @@ class _GroupbyPageState extends State<GroupbyPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Search Bar
+              CustomSearchBar(hintText: 'Cari beras'),
+
               // Kategori
-              const SizedBox(height: 8),
+              const SizedBox(height: 15),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -84,18 +96,8 @@ class _GroupbyPageState extends State<GroupbyPage> {
                 ),
               ),
 
-              // Title
-              SizedBox(height: 10),
-              Text(
-                'Daftar Patungan Aktif',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 18,
-                ),
-              ),
-              
               // Grid View
-              const SizedBox(height: 10),
+              const SizedBox(height: 15),
               Expanded(
                 child: MasonryGridView.builder(
                   gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
@@ -145,10 +147,9 @@ class _GroupbyPageState extends State<GroupbyPage> {
                                         'Beras Premium Mentik Wangi 10 kg',
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodySmall
+                                            .labelSmall
                                             ?.copyWith(
-                                              fontSize: 11,
-                                              fontWeight: FontWeight.w900,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
@@ -180,46 +181,6 @@ class _GroupbyPageState extends State<GroupbyPage> {
                                               decoration:
                                                   TextDecoration.lineThrough,
                                             ),
-                                      ),
-
-                                      // Count Down
-                                      // SizedBox(height: 10),
-                                      Text(
-                                        'Ends in: 01:25:30',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelSmall
-                                            ?.copyWith(color: Colors.grey),
-                                      ),
-
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: LinearProgressIndicator(
-                                              minHeight: 6,
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                              value: 0.8,
-                                              color: Theme.of(
-                                                context,
-                                              ).colorScheme.primary,
-                                              backgroundColor: Colors.black12,
-                                            ),
-                                          ),
-                                          SizedBox(width: 10),
-                                          Text(
-                                            '5/6',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodySmall
-                                                ?.copyWith(
-                                                  fontWeight: FontWeight.w800,
-                                                  color: Theme.of(
-                                                    context,
-                                                  ).colorScheme.primary,
-                                                ),
-                                          ),
-                                        ],
                                       ),
 
                                       // Button
