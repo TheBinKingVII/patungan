@@ -10,6 +10,7 @@ class CatalogHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Top row with title and notification icons
+          
           Row(
             children: [
               // Gradient Patungan text
