@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:patungan/features/detail_product/presentation/pages/detail_product.dart';
 import 'package:patungan/features/groupbuy/presentation/widgets/choiche_chip.dart';
 import 'package:patungan/features/groupbuy/presentation/widgets/join_button.dart';
 import 'package:patungan/features/groupbuy/presentation/widgets/search_bar.dart';
@@ -18,6 +19,93 @@ class _GroupbyPageState extends State<GroupbyPage> {
     'Paling Urgent',
     'Diskon Tertinggi',
     'Slot Terbanyak',
+  ];
+
+  final List<Map<String, dynamic>> product = [
+    {
+      "title": "Beras Premium Mentik Wangi 10 kg",
+      "image": "assets/images/beras.png",
+      "label": "Only 2 Spots left!",
+      "price": "Rp145.000",
+      "discount": "Rp180.000",
+      "count_down": "01:20:30",
+      "value": 0.8,
+      "rating": 4.5,
+      "toko": "Toko Makmur Sentosa",
+      "details": {
+        "Spesifikasi": [
+          "Jenis Beras: Mentik Wangi Super",
+          "Berat Bersih: 10 kg",
+          "Tekstur: Pulen, Wangi Alami",
+          "Sertifikasi: Halal MUI, SNI 6729-2016",
+        ],
+        "Informasi Patungan": [
+          "Minimum Order: 1 Karung (10kg)",
+          "Total Kuota: 10 Slot",
+          "Hemat: 20% dari harga normal",
+        ],
+        "Pengiriman": [
+          "Pengemasan: Karung Ganda (Anti Bocor)",
+          "Disarankan pakai Instan/Sameday",
+        ],
+      },
+    },
+    {
+      "title": "Minyak Goreng 2L Pouch (3 Pcs)",
+      "image": "assets/images/minyak.png",
+      "label": "Only 1 Spots left!",
+      "price": "Rp48.000",
+      "discount": "Rp60.000",
+      "count_down": "01:25:30",
+      "value": 0.9,
+      "rating": 4.5,
+      "toko": "Toko Makmur Sentosa",
+      "details": {
+        "Spesifikasi": [
+          "Jenis Beras: Mentik Wangi Super",
+          "Berat Bersih: 10 kg",
+          "Tekstur: Pulen, Wangi Alami",
+          "Sertifikasi: Halal MUI, SNI 6729-2016",
+        ],
+        "Informasi Patungan": [
+          "Minimum Order: 1 Karung (10kg)",
+          "Total Kuota: 10 Slot",
+          "Hemat: 20% dari harga normal",
+        ],
+        "Pengiriman": [
+          "Pengemasan: Karung Ganda (Anti Bocor)",
+          "Disarankan pakai Instan/Sameday",
+        ],
+      },
+    },
+    {
+      "title": "Hoodie BASIC ESSENTIALS",
+      "image": "assets/images/jaket.png",
+      "label": "Only 1 Spots left!",
+      "price": "Rp179.000",
+      "discount": "Rp300.000",
+      "count_down": "00:45:12",
+      "value": 0.9,
+      "rating": 4.5,
+      "toko": "Toko Makmur Sentosa",
+      "details": {
+        "Spesifikasi": [
+          "Jenis Beras: Mentik Wangi Super",
+          "Berat Bersih: 10 kg",
+          "Tekstur: Pulen, Wangi Alami",
+          "Sertifikasi: Halal MUI, SNI 6729-2016",
+        ],
+        "Informasi Patungan": [
+          "Minimum Order: 1 Karung (10kg)",
+          "Total Kuota: 10 Slot",
+          "Hemat: 20% dari harga normal",
+        ],
+        "Pengiriman": [
+          "Pengemasan: Karung Ganda (Anti Bocor)",
+          "Disarankan pakai Instan/Sameday",
+        ],
+      },
+    },
   ];
 
   @override
@@ -93,17 +181,20 @@ class _GroupbyPageState extends State<GroupbyPage> {
                   fontSize: 18,
                 ),
               ),
-              
+
               // Grid View
               const SizedBox(height: 10),
               Expanded(
                 child: MasonryGridView.builder(
+                  itemCount: product.length,
                   gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                   ),
                   mainAxisSpacing: 8,
                   crossAxisSpacing: 6,
                   itemBuilder: (context, index) {
+                    final data = product[index];
+
                     return Card(
                       color: Colors.transparent,
                       elevation: 3,
@@ -118,7 +209,15 @@ class _GroupbyPageState extends State<GroupbyPage> {
                           child: InkWell(
                             borderRadius: BorderRadius.circular(12),
                             splashColor: Colors.grey.shade300,
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailProduct(productData: data),
+                                ),
+                              );
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8),
                               child: Stack(
@@ -131,18 +230,18 @@ class _GroupbyPageState extends State<GroupbyPage> {
                                       // Image
                                       ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
-                                        child: Image.network(
-                                          'https://resepkoki.id/wp-content/uploads/2020/03/Resep-Mie-Setan.jpg',
+                                        child: Image.asset(
+                                          data['image'],
                                           width: double.infinity,
                                           height: 100,
-                                          fit: BoxFit.fitWidth,
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
 
                                       // Title
                                       SizedBox(height: 8),
                                       Text(
-                                        'Beras Premium Mentik Wangi 10 kg',
+                                        data['title'],
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodySmall
@@ -157,7 +256,7 @@ class _GroupbyPageState extends State<GroupbyPage> {
                                       // Main Price
                                       SizedBox(height: 6),
                                       Text(
-                                        'Rp145.000',
+                                        data['price'],
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyLarge
@@ -171,7 +270,7 @@ class _GroupbyPageState extends State<GroupbyPage> {
 
                                       // Discount Price
                                       Text(
-                                        'Rp180.000',
+                                        data['discount'],
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodySmall
@@ -183,9 +282,8 @@ class _GroupbyPageState extends State<GroupbyPage> {
                                       ),
 
                                       // Count Down
-                                      // SizedBox(height: 10),
                                       Text(
-                                        'Ends in: 01:25:30',
+                                        'Ends ${data['count_down']}',
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelSmall
@@ -199,7 +297,7 @@ class _GroupbyPageState extends State<GroupbyPage> {
                                               minHeight: 6,
                                               borderRadius:
                                                   BorderRadius.circular(30),
-                                              value: 0.8,
+                                              value: data['value'],
                                               color: Theme.of(
                                                 context,
                                               ).colorScheme.primary,
@@ -255,7 +353,7 @@ class _GroupbyPageState extends State<GroupbyPage> {
                                                   BorderRadius.circular(30),
                                             ),
                                             child: Text(
-                                              "Only 2 Spots left!",
+                                              data['label'],
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelSmall
