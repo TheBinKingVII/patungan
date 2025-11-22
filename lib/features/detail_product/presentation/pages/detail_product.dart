@@ -1,17 +1,48 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:patungan/features/category/presentation/widgets/back_button.dart';
 import 'package:patungan/features/detail_product/presentation/widgets/rating.dart';
-// import 'package:patungan/features/category/presentation/widgets/choiche_chip.dart';
-// import 'package:patungan/features/category/presentation/widgets/search_bar.dart';
-// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:patungan/features/detail_product/presentation/widgets/rating_summary.dart';
+import 'package:patungan/features/detail_product/presentation/widgets/reviews.dart';
 
-class DetailProduct extends StatelessWidget {
+class DetailProduct extends StatefulWidget {
   final Map<String, dynamic> productData;
+
   const DetailProduct({super.key, required this.productData});
 
   @override
+  State<DetailProduct> createState() => _DetailProductState();
+}
+
+class _DetailProductState extends State<DetailProduct> {
+  @override
   Widget build(BuildContext context) {
+    final List<Map<String, dynamic>> reviews = [
+      {
+        "user": "Payno L",
+        "comment":
+            "Packing super aman! Minyak goreng rawan bocor, tapi paket ini dibungkus berlapis-lapis. Patungan cepat penuh karena sisa 1 slot, untung kebagian. Toko Suka-Suka memang top.",
+        "date": "4 days ago",
+        "value": 4.5,
+        "avatar": "https://i.pravatar.cc/150?img=12",
+      },
+      {
+        "user": "Sabrina Car",
+        "comment":
+            "Harga Patungan memang paling murah. Pengiriman dari kurir sedikit lambat, untungnya packing aman.",
+        "date": "1 weeks ago",
+        "value": 3.0,
+        "avatar": "https://i.pravatar.cc/150?img=25",
+      },
+      {
+        "user": "Lottie T",
+        "comment":
+            "Packing super aman! Minyak tidak ada rembes. Patungan tercepat yang pernah saya ikuti.",
+        "date": "2 months ago",
+        "value": 5.0,
+        "avatar": "https://i.pravatar.cc/150?img=30",
+      },
+    ];
+
     return Scaffold(
       backgroundColor: const Color(0xffF2F2F2),
       appBar: AppBar(
@@ -64,7 +95,7 @@ class DetailProduct extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset(
-                          productData['image'],
+                          widget.productData['image'],
                           width: double.infinity,
                           height: 160,
                           fit: BoxFit.cover,
@@ -79,25 +110,31 @@ class DetailProduct extends StatelessWidget {
                             // Title
                             SizedBox(height: 170),
                             Text(
-                              productData['title'],
+                              widget.productData['title'],
                               style: Theme.of(context).textTheme.bodyMedium
                                   ?.copyWith(
-                                    color: Theme.of(context).colorScheme.primary,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
                                     fontWeight: FontWeight.w900,
                                   ),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
-            
+
                             // Rating
                             SizedBox(height: 5),
-                            Rating(ratingValue: 4.5, size: 15, fontSize: 14),
+                            Rating(
+                              ratingValue: widget.productData['rating'],
+                              size: 15,
+                              fontSize: 14,
+                            ),
                             SizedBox(height: 5),
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  productData['toko'],
+                                  widget.productData['toko'],
                                   style: Theme.of(context).textTheme.bodySmall
                                       ?.copyWith(
                                         color: Theme.of(
@@ -114,7 +151,7 @@ class DetailProduct extends StatelessWidget {
                               ],
                             ),
                             SizedBox(height: 8),
-            
+
                             // // Main Price
                             // SizedBox(height: 6),
                             // Text(
@@ -125,7 +162,7 @@ class DetailProduct extends StatelessWidget {
                             //         color: Theme.of(context).colorScheme.tertiary,
                             //       ),
                             // ),
-            
+
                             // // Discount Price
                             // Text(
                             //   productData['discount'],
@@ -135,14 +172,14 @@ class DetailProduct extends StatelessWidget {
                             //         decoration: TextDecoration.lineThrough,
                             //       ),
                             // ),
-            
+
                             // // Count Down
                             // Text(
                             //   'Ends ${productData['count_down']}',
                             //   style: Theme.of(context).textTheme.labelSmall
                             //       ?.copyWith(color: Colors.grey),
                             // ),
-            
+
                             // Row(
                             //   children: [
                             //     Expanded(
@@ -167,7 +204,7 @@ class DetailProduct extends StatelessWidget {
                             //     ),
                             //   ],
                             // ),
-            
+
                             // Button
                             // SizedBox(height: 8),
                             // JoinButton(onPressed: () {}),
@@ -175,7 +212,7 @@ class DetailProduct extends StatelessWidget {
                           ],
                         ),
                       ),
-            
+
                       // Tag
                       Align(
                         alignment: AlignmentGeometry.centerRight,
@@ -200,7 +237,7 @@ class DetailProduct extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Text(
-                                  productData['label'],
+                                  widget.productData['label'],
                                   style: Theme.of(context).textTheme.labelSmall
                                       ?.copyWith(
                                         fontSize: 8,
@@ -215,50 +252,83 @@ class DetailProduct extends StatelessWidget {
                     ],
                   ),
                 ),
-            
+
                 SizedBox(height: 16),
                 Card(
                   elevation: 0,
-                  color: Colors.white, 
+                  color: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            // Subtitle
+                            Text(
+                              "Harga Normal",
+                              style: Theme.of(context).textTheme.bodyLarge
+                                  ?.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 16),
+                Card(
+                  elevation: 0,
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // Subtitle
                         Text(
                           "Deskripsi Produk",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF101828),
-                          ),
+                          style: Theme.of(context).textTheme.bodyLarge
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.w900,
+                              ),
                         ),
-                        SizedBox(height: 12),
-            
+
+                        SizedBox(height: 8),
                         Builder(
                           builder: (context) {
                             final Map<String, dynamic> details =
-                                productData['details'] ?? {};
-            
+                                widget.productData['details'] ?? {};
+
                             if (details.isEmpty) {
                               return Text("Tidak ada deskripsi detail.");
                             }
-            
+
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ...details.entries.map((entry) {
                                   String kategori = entry.key;
-            
+
                                   List<String> points = List<String>.from(
                                     entry.value,
                                   );
-            
+
                                   return Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       // Judul Sub-Kategori
                                       Padding(
@@ -275,7 +345,7 @@ class DetailProduct extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-            
+
                                       ...points.map((point) {
                                         return Padding(
                                           padding: const EdgeInsets.only(
@@ -318,8 +388,89 @@ class DetailProduct extends StatelessWidget {
                     ),
                   ),
                 ),
-            
-                SizedBox(height: 30), 
+
+                // Review
+                SizedBox(height: 30),
+                Card(
+                  elevation: 0,
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Review Produk",
+                          style: Theme.of(context).textTheme.bodyLarge
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.w900,
+                              ),
+                        ),
+
+                        // Rating Summary
+                        SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Text(
+                                    widget.productData['rating'].toString(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall
+                                        ?.copyWith(
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.primary,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                  ),
+
+                                  SizedBox(height: 10),
+                                  Rating(
+                                    ratingValue: widget.productData['rating'],
+                                    size: 24,
+                                    fontSize: 14,
+                                    isShowText: false,
+                                  ),
+
+                                  SizedBox(height: 6),
+                                  Text(
+                                    '(5k reviews)',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                          color: Colors.grey.shade800,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            SizedBox(width: 20),
+                            Expanded(
+                              child: RatingSummary(
+                                ratingValues: [0.8, 0.6, 0.3, 0.2, 0.1],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        Reviews(reviewsData: reviews),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';  
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class Rating extends StatelessWidget {
   final double ratingValue;
   final double? size;
   final double? fontSize;
+  final bool isShowText;
 
-  const Rating({super.key, required this.ratingValue, this.size, this.fontSize});
+  const Rating({
+    super.key,
+    required this.ratingValue,
+    this.size,
+    this.fontSize,
+    this.isShowText = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,27 +21,26 @@ class Rating extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         RatingBarIndicator(
-          rating: ratingValue, 
-          itemBuilder: (context, index) => Icon(
-            Icons.star,
-            color: Colors.amber,
-          ),
+          rating: ratingValue,
+          itemBuilder: (context, index) =>
+              Icon(Icons.star, color: Colors.amber),
           itemCount: 5,
-          itemSize: size ?? 24.0, 
+          itemSize: size ?? 24.0,
           direction: Axis.horizontal,
-          unratedColor: Colors.grey.shade300, 
+          unratedColor: Colors.grey.shade300,
         ),
-        
-        SizedBox(width: 8), 
-        
-        Text(
-          "$ratingValue",
-          style: TextStyle(
-            fontSize: fontSize ?? 16.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.grey.shade600,
+
+        if (isShowText) ...[
+          SizedBox(width: 8),
+          Text(
+            "$ratingValue",
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontSize: fontSize ?? 16.0,
+              color: Colors.grey.shade600,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
+        ],
       ],
     );
   }
