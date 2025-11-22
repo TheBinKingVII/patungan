@@ -1,30 +1,21 @@
 import 'package:flutter/material.dart';
 
-class JoinButton extends StatelessWidget {
+class BuyNowButton extends StatelessWidget {
   final String? label;
   final double? height;
   final VoidCallback? onPressed;
   final TextStyle? textStyle;
-  final bool isFilled;
-  final bool isGradient;
 
-  const JoinButton({
+  const BuyNowButton({
     super.key,
     this.label,
     this.height,
     this.onPressed,
     this.textStyle,
-    this.isFilled = true,
-    this.isGradient = true,
   });
 
   @override
   Widget build(BuildContext context) {
-    const gradient = LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [Color(0xFFAA2F6A), Color(0xFFD64E56), Color(0xFFEEBE4B)],
-    );
     final theme = Theme.of(context);
 
     return Container(
@@ -32,11 +23,11 @@ class JoinButton extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        gradient: gradient,
+        border: Border.all(width: 1.5, color: theme.colorScheme.primary),
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.all(0),
+          padding: EdgeInsets.zero,
           backgroundColor: Colors.transparent,
           minimumSize: const Size(double.infinity, 10),
           elevation: 0,
@@ -46,10 +37,11 @@ class JoinButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: Text(
-          label ?? 'Join Now',
-          style: textStyle ?? 
+          label ?? 'Buy Now',
+          style:
+              textStyle ??
               theme.textTheme.labelSmall?.copyWith(
-                color: Colors.white,
+                color: theme.colorScheme.primary,
                 fontWeight: FontWeight.w900,
               ),
         ),
