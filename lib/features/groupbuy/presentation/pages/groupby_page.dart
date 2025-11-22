@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:patungan/core/utils/rupiah_format.dart';
 import 'package:patungan/features/detail_product/presentation/pages/detail_product.dart';
 import 'package:patungan/features/groupbuy/presentation/widgets/choiche_chip.dart';
 import 'package:patungan/features/groupbuy/presentation/widgets/join_button.dart';
@@ -26,8 +27,8 @@ class _GroupbyPageState extends State<GroupbyPage> {
       "title": "Beras Premium Mentik Wangi 10 kg",
       "image": "assets/images/beras.png",
       "label": "Only 2 Spots left!",
-      "price": "Rp145.000",
-      "discount": "Rp180.000",
+      "price": 145000,
+      "discount": 180000,
       "count_down": "01:20:30",
       "value": 0.8,
       "rating": 4.5,
@@ -54,8 +55,8 @@ class _GroupbyPageState extends State<GroupbyPage> {
       "title": "Minyak Goreng 2L Pouch (3 Pcs)",
       "image": "assets/images/minyak.png",
       "label": "Only 1 Spots left!",
-      "price": "Rp48.000",
-      "discount": "Rp60.000",
+      "price": 48000,
+      "discount": 60000,
       "count_down": "01:25:30",
       "value": 0.9,
       "rating": 4.5,
@@ -82,8 +83,8 @@ class _GroupbyPageState extends State<GroupbyPage> {
       "title": "Hoodie BASIC ESSENTIALS",
       "image": "assets/images/jaket.png",
       "label": "Only 1 Spots left!",
-      "price": "Rp179.000",
-      "discount": "Rp300.000",
+      "price": 179000,
+      "discount": 300000,
       "count_down": "00:45:12",
       "value": 0.9,
       "rating": 4.5,
@@ -256,7 +257,7 @@ class _GroupbyPageState extends State<GroupbyPage> {
                                       // Main Price
                                       SizedBox(height: 6),
                                       Text(
-                                        data['price'],
+                                        CurrencyFormat.convertToIdr(data['price'], 0),
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyLarge
@@ -270,7 +271,7 @@ class _GroupbyPageState extends State<GroupbyPage> {
 
                                       // Discount Price
                                       Text(
-                                        data['discount'],
+                                        CurrencyFormat.convertToIdr(data['discount'], 0),
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodySmall

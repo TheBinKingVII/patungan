@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:patungan/features/category/presentation/widgets/back_button.dart';
+import 'package:patungan/features/detail_product/presentation/widgets/normal_card.dart';
+import 'package:patungan/features/detail_product/presentation/widgets/patungan_card.dart';
 import 'package:patungan/features/detail_product/presentation/widgets/rating.dart';
 import 'package:patungan/features/detail_product/presentation/widgets/rating_summary.dart';
 import 'package:patungan/features/detail_product/presentation/widgets/reviews.dart';
+import 'package:patungan/features/detail_product/presentation/widgets/toogle_switch.dart';
 
 class DetailProduct extends StatefulWidget {
   final Map<String, dynamic> productData;
@@ -14,6 +17,8 @@ class DetailProduct extends StatefulWidget {
 }
 
 class _DetailProductState extends State<DetailProduct> {
+  bool isPatungan = true;
+
   @override
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> reviews = [
@@ -87,13 +92,13 @@ class _DetailProductState extends State<DetailProduct> {
                 Card(
                   elevation: 0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: Stack(
                     children: [
                       // Image
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(15),
                         child: Image.asset(
                           widget.productData['image'],
                           width: double.infinity,
@@ -151,64 +156,6 @@ class _DetailProductState extends State<DetailProduct> {
                               ],
                             ),
                             SizedBox(height: 8),
-
-                            // // Main Price
-                            // SizedBox(height: 6),
-                            // Text(
-                            //   productData['price'],
-                            //   style: Theme.of(context).textTheme.bodyLarge
-                            //       ?.copyWith(
-                            //         fontWeight: FontWeight.w900,
-                            //         color: Theme.of(context).colorScheme.tertiary,
-                            //       ),
-                            // ),
-
-                            // // Discount Price
-                            // Text(
-                            //   productData['discount'],
-                            //   style: Theme.of(context).textTheme.bodySmall
-                            //       ?.copyWith(
-                            //         color: Colors.grey.shade700,
-                            //         decoration: TextDecoration.lineThrough,
-                            //       ),
-                            // ),
-
-                            // // Count Down
-                            // Text(
-                            //   'Ends ${productData['count_down']}',
-                            //   style: Theme.of(context).textTheme.labelSmall
-                            //       ?.copyWith(color: Colors.grey),
-                            // ),
-
-                            // Row(
-                            //   children: [
-                            //     Expanded(
-                            //       child: LinearProgressIndicator(
-                            //         minHeight: 6,
-                            //         borderRadius: BorderRadius.circular(30),
-                            //         value: productData['value'],
-                            //         color: Theme.of(context).colorScheme.primary,
-                            //         backgroundColor: Colors.black12,
-                            //       ),
-                            //     ),
-                            //     SizedBox(width: 10),
-                            //     Text(
-                            //       '5/6',
-                            //       style: Theme.of(context).textTheme.bodySmall
-                            //           ?.copyWith(
-                            //             fontWeight: FontWeight.w800,
-                            //             color: Theme.of(
-                            //               context,
-                            //             ).colorScheme.primary,
-                            //           ),
-                            //     ),
-                            //   ],
-                            // ),
-
-                            // Button
-                            // SizedBox(height: 8),
-                            // JoinButton(onPressed: () {}),
-                            // SizedBox(height: 6),
                           ],
                         ),
                       ),
@@ -253,43 +200,30 @@ class _DetailProductState extends State<DetailProduct> {
                   ),
                 ),
 
-                SizedBox(height: 16),
-                Card(
-                  elevation: 0,
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            // Subtitle
-                            Text(
-                              "Harga Normal",
-                              style: Theme.of(context).textTheme.bodyLarge
-                                  ?.copyWith(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.primary,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                SizedBox(height: 10),
+                ToggleSwitch(
+                  isPatungan: isPatungan,
+                  onChanged: (value) {
+                    setState(() {
+                      isPatungan = value;
+                    });
+                  },
                 ),
 
-                SizedBox(height: 16),
+                SizedBox(height: 10),
+                AnimatedSwitcher(
+                  duration: Duration(milliseconds: 300),
+                  child: isPatungan
+                      ? PatunganCard(productData: widget.productData)
+                      : NormalCard(productData: widget.productData),
+                ),
+
+                SizedBox(height: 10),
                 Card(
                   elevation: 0,
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -390,12 +324,12 @@ class _DetailProductState extends State<DetailProduct> {
                 ),
 
                 // Review
-                SizedBox(height: 30),
+                SizedBox(height: 10),
                 Card(
                   elevation: 0,
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
