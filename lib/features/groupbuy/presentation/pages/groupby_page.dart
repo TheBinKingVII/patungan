@@ -5,6 +5,7 @@ import 'package:patungan/features/groupbuy/presentation/widgets/choiche_chip.dar
 import 'package:patungan/features/groupbuy/presentation/widgets/join_button.dart';
 import 'package:patungan/features/groupbuy/presentation/widgets/search_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:patungan/features/groupbuy/presentation/pages/groupby_detailed.dart'; 
 
 class GroupbyPage extends StatefulWidget {
   const GroupbyPage({super.key});
@@ -323,7 +324,17 @@ class _GroupbyPageState extends State<GroupbyPage> {
 
                                       // Button
                                       SizedBox(height: 8),
-                                      JoinButton(onPressed: () {}),
+                                      JoinButton(onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                GroupbyDetailedPage(
+                                              productData: data,
+                                            ),
+                                          ),
+                                        );
+                                      }),
                                       SizedBox(height: 6),
                                     ],
                                   ),
