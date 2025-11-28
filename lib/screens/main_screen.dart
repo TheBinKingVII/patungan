@@ -22,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   final List<IconData> icons = [
-    Icons.home_rounded,
+    Icons.home_outlined,
     Icons.receipt_long_rounded,
     Icons.shopping_cart_outlined,
     Icons.person_outline_rounded,
