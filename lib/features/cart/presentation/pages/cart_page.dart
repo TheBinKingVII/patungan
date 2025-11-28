@@ -138,7 +138,7 @@ class _CartPageState extends State<CartPage> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                      'Total: ${CurrencyFormat.convertToIdr(totalPrice, 0)}',
+                        'Total: ${CurrencyFormat.convertToIdr(totalPrice, 0)}',
                         style: const TextStyle(
                           fontWeight: FontWeight.w900,
                           fontSize: 16,
@@ -153,7 +153,9 @@ class _CartPageState extends State<CartPage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const CheckoutPage()),
+                        MaterialPageRoute(
+                          builder: (context) => const CheckoutPage(),
+                        ),
                       );
                     },
                   ),
