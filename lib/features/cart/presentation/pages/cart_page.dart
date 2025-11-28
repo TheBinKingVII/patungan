@@ -4,6 +4,7 @@ import 'package:patungan/features/cart/presentation/widgets/button_back.dart';
 import 'package:patungan/features/cart/presentation/widgets/checkout_button.dart';
 import 'package:patungan/features/cart/presentation/widgets/store_card.dart';
 import 'package:patungan/features/cart/presentation/widgets/switch.dart';
+import 'package:patungan/features/cehckout/presentation/pages/checkout_page.dart';
 import 'package:patungan/screens/main_screen.dart';
 
 class CartPage extends StatefulWidget {
@@ -149,7 +150,12 @@ class _CartPageState extends State<CartPage> {
                   CheckoutButton(
                     isGradient: true,
                     label: 'Checkout',
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const CheckoutPage()),
+                      );
+                    },
                   ),
                 ],
               ),
