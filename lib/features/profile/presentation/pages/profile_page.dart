@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:patungan/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:patungan/features/auth/presentation/pages/register_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -17,7 +18,7 @@ class ProfilePage extends StatelessWidget {
           label: const Text('Sign out'),
           onPressed: () async {
             await authController.signOut();
-            // Navigation akan di-handle otomatis oleh _AuthGate di main.dart
+            Get.offAll(() => const RegisterPage());
           },
         ),
       ),

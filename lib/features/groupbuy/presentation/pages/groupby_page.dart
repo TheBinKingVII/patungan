@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
 import 'package:patungan/core/utils/rupiah_format.dart';
 import 'package:patungan/features/detail_product/presentation/pages/detail_product.dart';
+import 'package:patungan/features/groupbuy/domain/entities/group_deal_entity.dart';
+import 'package:patungan/features/groupbuy/presentation/controllers/group_deal_controller.dart';
 import 'package:patungan/features/groupbuy/presentation/widgets/choiche_chip.dart';
 import 'package:patungan/features/groupbuy/presentation/widgets/join_button.dart';
 import 'package:patungan/features/groupbuy/presentation/widgets/search_bar.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class GroupbyPage extends StatefulWidget {
   const GroupbyPage({super.key});
@@ -16,98 +19,19 @@ class GroupbyPage extends StatefulWidget {
 class _GroupbyPageState extends State<GroupbyPage> {
   int selectedIndex = 0;
 
+  late final GroupDealController _controller;
+
   final List<String> categories = [
     'Paling Urgent',
     'Diskon Tertinggi',
     'Slot Terbanyak',
   ];
 
-  final List<Map<String, dynamic>> product = [
-    {
-      "title": "Beras Premium Mentik Wangi 10 kg",
-      "image": "assets/images/beras.png",
-      "label": "Only 2 Spots left!",
-      "price": 145000,
-      "discount": 180000,
-      "count_down": "01:20:30",
-      "value": 0.8,
-      "rating": 4.5,
-      "toko": "Toko Makmur Sentosa",
-      "details": {
-        "Spesifikasi": [
-          "Jenis Beras: Mentik Wangi Super",
-          "Berat Bersih: 10 kg",
-          "Tekstur: Pulen, Wangi Alami",
-          "Sertifikasi: Halal MUI, SNI 6729-2016",
-        ],
-        "Informasi Patungan": [
-          "Minimum Order: 1 Karung (10kg)",
-          "Total Kuota: 10 Slot",
-          "Hemat: 20% dari harga normal",
-        ],
-        "Pengiriman": [
-          "Pengemasan: Karung Ganda (Anti Bocor)",
-          "Disarankan pakai Instan/Sameday",
-        ],
-      },
-    },
-    {
-      "title": "Minyak Goreng 2L Pouch (3 Pcs)",
-      "image": "assets/images/minyak.png",
-      "label": "Only 1 Spots left!",
-      "price": 48000,
-      "discount": 60000,
-      "count_down": "01:25:30",
-      "value": 0.9,
-      "rating": 4.5,
-      "toko": "Toko Makmur Sentosa",
-      "details": {
-        "Spesifikasi": [
-          "Jenis Beras: Mentik Wangi Super",
-          "Berat Bersih: 10 kg",
-          "Tekstur: Pulen, Wangi Alami",
-          "Sertifikasi: Halal MUI, SNI 6729-2016",
-        ],
-        "Informasi Patungan": [
-          "Minimum Order: 1 Karung (10kg)",
-          "Total Kuota: 10 Slot",
-          "Hemat: 20% dari harga normal",
-        ],
-        "Pengiriman": [
-          "Pengemasan: Karung Ganda (Anti Bocor)",
-          "Disarankan pakai Instan/Sameday",
-        ],
-      },
-    },
-    {
-      "title": "Hoodie BASIC ESSENTIALS",
-      "image": "assets/images/jaket.png",
-      "label": "Only 1 Spots left!",
-      "price": 179000,
-      "discount": 300000,
-      "count_down": "00:45:12",
-      "value": 0.9,
-      "rating": 4.5,
-      "toko": "Toko Makmur Sentosa",
-      "details": {
-        "Spesifikasi": [
-          "Jenis Beras: Mentik Wangi Super",
-          "Berat Bersih: 10 kg",
-          "Tekstur: Pulen, Wangi Alami",
-          "Sertifikasi: Halal MUI, SNI 6729-2016",
-        ],
-        "Informasi Patungan": [
-          "Minimum Order: 1 Karung (10kg)",
-          "Total Kuota: 10 Slot",
-          "Hemat: 20% dari harga normal",
-        ],
-        "Pengiriman": [
-          "Pengemasan: Karung Ganda (Anti Bocor)",
-          "Disarankan pakai Instan/Sameday",
-        ],
-      },
-    },
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _controller = Get.put(GroupDealController(), permanent: false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -186,194 +110,274 @@ class _GroupbyPageState extends State<GroupbyPage> {
               // Grid View
               const SizedBox(height: 10),
               Expanded(
-                child: MasonryGridView.builder(
-                  itemCount: product.length,
-                  gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                  ),
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 6,
-                  itemBuilder: (context, index) {
-                    final data = product[index];
+                child: StreamBuilder<List<GroupDealEntity>>(
+                  stream: _controller.groupDealsStream,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text(
+                          'Gagal memuat data patungan:\n${snapshot.error}',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      );
+                    }
 
-                    return Card(
-                      color: Colors.transparent,
-                      elevation: 3,
-                      shadowColor: Colors.black45,
-                      child: Material(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
+                    final deals = snapshot.data ?? [];
+                    if (deals.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'Belum ada patungan aktif',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      );
+                    }
+
+                    return MasonryGridView.builder(
+                      itemCount: deals.length,
+                      gridDelegate:
+                          const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
                           ),
-                          child: InkWell(
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 6,
+                      itemBuilder: (context, index) {
+                        final GroupDealEntity deal = deals[index];
+                        final Map<String, dynamic> data = deal.rawData;
+
+                        final double? progress = _calculateProgress(deal);
+                        final String? progressLabel = _progressLabel(
+                          deal,
+                          progress,
+                        );
+                        final String imageSource = deal.image;
+
+                        Widget buildImage() {
+                          if (imageSource.isEmpty) {
+                            return Container(
+                              height: 100,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.grey.shade200,
+                              ),
+                              child: const Icon(Icons.image_not_supported),
+                            );
+                          }
+                          final isNetwork =
+                              imageSource.startsWith('http') ||
+                              imageSource.startsWith('https');
+                          return ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: isNetwork
+                                ? Image.network(
+                                    imageSource,
+                                    width: double.infinity,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (_, __, ___) => Container(
+                                      height: 100,
+                                      color: Colors.grey.shade200,
+                                      child: const Icon(Icons.broken_image),
+                                    ),
+                                  )
+                                : Image.asset(
+                                    imageSource,
+                                    width: double.infinity,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                  ),
+                          );
+                        }
+
+                        final String countdownText = _countdownText(deal.endAt);
+
+                        return Card(
+                          color: Colors.transparent,
+                          elevation: 3,
+                          shadowColor: Colors.black45,
+                          child: Material(
                             borderRadius: BorderRadius.circular(12),
-                            splashColor: Colors.grey.shade300,
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      DetailProduct(productData: data),
-                                ),
-                              );
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Stack(
-                                children: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(12),
+                                splashColor: Colors.grey.shade300,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          DetailProduct(productData: data),
+                                    ),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Stack(
                                     children: [
-                                      // Image
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.asset(
-                                          data['image'],
-                                          width: double.infinity,
-                                          height: 100,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-
-                                      // Title
-                                      SizedBox(height: 8),
-                                      Text(
-                                        data['title'],
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                              fontSize: 11,
-                                              fontWeight: FontWeight.w900,
-                                            ),
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-
-                                      // Main Price
-                                      SizedBox(height: 6),
-                                      Text(
-                                        CurrencyFormat.convertToIdr(data['price'], 0),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge
-                                            ?.copyWith(
-                                              fontWeight: FontWeight.w900,
-                                              color: Theme.of(
-                                                context,
-                                              ).colorScheme.tertiary,
-                                            ),
-                                      ),
-
-                                      // Discount Price
-                                      Text(
-                                        CurrencyFormat.convertToIdr(data['discount'], 0),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                              color: Colors.grey.shade700,
-                                              decoration:
-                                                  TextDecoration.lineThrough,
-                                            ),
-                                      ),
-
-                                      // Count Down
-                                      Text(
-                                        'Ends ${data['count_down']}',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelSmall
-                                            ?.copyWith(color: Colors.grey),
-                                      ),
-
-                                      Row(
+                                      Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Expanded(
-                                            child: LinearProgressIndicator(
-                                              minHeight: 6,
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                              value: data['value'],
-                                              color: Theme.of(
-                                                context,
-                                              ).colorScheme.primary,
-                                              backgroundColor: Colors.black12,
-                                            ),
-                                          ),
-                                          SizedBox(width: 10),
+                                          buildImage(),
+                                          const SizedBox(height: 8),
                                           Text(
-                                            '5/6',
+                                            deal.title,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .bodySmall
                                                 ?.copyWith(
-                                                  fontWeight: FontWeight.w800,
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.w900,
+                                                ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const SizedBox(height: 6),
+                                          Text(
+                                            CurrencyFormat.convertToIdr(
+                                              deal.price,
+                                              0,
+                                            ),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge
+                                                ?.copyWith(
+                                                  fontWeight: FontWeight.w900,
+                                                  color: Theme.of(
+                                                    context,
+                                                  ).colorScheme.tertiary,
+                                                ),
+                                          ),
+                                          Text(
+                                            CurrencyFormat.convertToIdr(
+                                              deal.discount,
+                                              0,
+                                            ),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall
+                                                ?.copyWith(
+                                                  color: Colors.grey.shade700,
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                ),
+                                          ),
+                                          Text(
+                                            countdownText,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelSmall
+                                                ?.copyWith(color: Colors.grey),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: LinearProgressIndicator(
+                                                  minHeight: 6,
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                  value: (() {
+                                                    final int current =
+                                                        deal.currentQuantity ??
+                                                        0;
+                                                    final int max =
+                                                        deal.targetQuantity ??
+                                                        0;
+                                                    if (max <= 0) {
+                                                      return ((progress ?? 0)
+                                                              .clamp(0, 1))
+                                                          .toDouble();
+                                                    }
+                                                    return ((current / max)
+                                                            .clamp(0, 1))
+                                                        .toDouble();
+                                                  })(),
                                                   color: Theme.of(
                                                     context,
                                                   ).colorScheme.primary,
+                                                  backgroundColor:
+                                                      Colors.black12,
                                                 ),
+                                              ),
+                                              const SizedBox(width: 10),
+                                              Text(
+                                                progressLabel ?? '',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall
+                                                    ?.copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w800,
+                                                      color: Theme.of(
+                                                        context,
+                                                      ).colorScheme.primary,
+                                                    ),
+                                              ),
+                                            ],
                                           ),
+                                          const SizedBox(height: 8),
+                                          JoinButton(onPressed: () {}),
+                                          const SizedBox(height: 6),
                                         ],
                                       ),
-
-                                      // Button
-                                      SizedBox(height: 8),
-                                      JoinButton(onPressed: () {}),
-                                      SizedBox(height: 6),
+                                      Align(
+                                        alignment:
+                                            AlignmentGeometry.centerRight,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Container(
+                                                padding: const EdgeInsets.all(
+                                                  5,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    begin: Alignment.centerLeft,
+                                                    end: Alignment.centerRight,
+                                                    colors: const [
+                                                      Color(0xFFAA2F6A),
+                                                      Color(0xFFD64E56),
+                                                      Color(0xFFEEBE4B),
+                                                    ],
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                ),
+                                                child: Text(
+                                                  "Only ${deal.targetQuantity! - deal.currentQuantity!} Spots left",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelSmall
+                                                      ?.copyWith(
+                                                        fontSize: 8,
+                                                        color: Colors.white,
+                                                      ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
-
-                                  // Tag
-                                  Align(
-                                    alignment: AlignmentGeometry.centerRight,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
-                                                colors: [
-                                                  Color(0xFFAA2F6A),
-                                                  Color(0xFFD64E56),
-                                                  Color(0xFFEEBE4B),
-                                                ],
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                            ),
-                                            child: Text(
-                                              data['label'],
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelSmall
-                                                  ?.copyWith(
-                                                    fontSize: 8,
-                                                    color: Colors.white,
-                                                  ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     );
                   },
                 ),
@@ -383,5 +387,47 @@ class _GroupbyPageState extends State<GroupbyPage> {
         ),
       ),
     );
+  }
+
+  double? _calculateProgress(GroupDealEntity deal) {
+    final int? target = deal.targetQuantity;
+    final int? current = deal.currentQuantity;
+    if (target != null && target > 0) {
+      return (current ?? 0).toDouble() / target.toDouble();
+    }
+    if (deal.value != null) {
+      return deal.value;
+    }
+    return null;
+  }
+
+  String? _progressLabel(GroupDealEntity deal, double? progress) {
+    final int? target = deal.targetQuantity;
+    final int? current = deal.currentQuantity;
+    if (target != null) {
+      return '${current ?? 0}/$target';
+    }
+    if (progress != null) {
+      final percentage = (progress * 100).clamp(0, 100).round();
+      return '$percentage%';
+    }
+    return null;
+  }
+
+  String _countdownText(DateTime? endAt) {
+    if (endAt != null) {
+      final diff = endAt.difference(DateTime.now());
+      if (diff.isNegative) {
+        return '00:00:00';
+      }
+      final hours = diff.inHours;
+      final minutes = diff.inMinutes.remainder(60);
+      final seconds = diff.inSeconds.remainder(60);
+      final hh = hours.toString().padLeft(2, '0');
+      final mm = minutes.toString().padLeft(2, '0');
+      final ss = seconds.toString().padLeft(2, '0');
+      return '$hh:$mm:$ss';
+    }
+    return '--:--:--';
   }
 }
