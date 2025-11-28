@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:patungan/core/utils/rupiah_format.dart';
 import 'package:patungan/features/category/presentation/widgets/join_button.dart';
@@ -35,7 +36,7 @@ class PatunganCard extends StatelessWidget {
                       ),
                       SizedBox(height: 6),
                       Text(
-                        CurrencyFormat.convertToIdr(productData['price'], 0),
+                        CurrencyFormat.convertToIdr(productData['discount'], 0),
                         style: Theme.of(context).textTheme.headlineSmall
                             ?.copyWith(
                               fontWeight: FontWeight.w700,
@@ -43,7 +44,7 @@ class PatunganCard extends StatelessWidget {
                             ),
                       ),
                       Text(
-                        CurrencyFormat.convertToIdr(productData['discount'], 0),
+                        CurrencyFormat.convertToIdr(productData['price'], 0),
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: Colors.grey.shade700,
                           decoration: TextDecoration.lineThrough,
@@ -79,7 +80,7 @@ class PatunganCard extends StatelessWidget {
                                 ),
                           ),
                           Text(
-                            '20%',
+                            "${((productData['price']! - productData['discount']!) / productData['price']! * 100).toStringAsFixed(0)}%",
                             style: Theme.of(context).textTheme.bodyMedium
                                 ?.copyWith(
                                   color: Colors.white,
@@ -94,22 +95,46 @@ class PatunganCard extends StatelessWidget {
               ],
             ),
             SizedBox(height: 5),
-            Text(
-              '5/6 slot filled',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                fontWeight: FontWeight.w400,
-                color: Theme.of(context).colorScheme.primary,
-              ),
+            Builder(
+              builder: (context) {
+                final int current =
+                    (productData['currentParticipant'] ?? 0) as int;
+                final int max = (productData['maxParticipant'] ?? 0) as int;
+                final text = (max > 0)
+                    ? '$current/$max slot filled'
+                    : '$current slot filled';
+                return Text(
+                  text,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                );
+              },
             ),
             Row(
               children: [
                 Expanded(
-                  child: LinearProgressIndicator(
-                    minHeight: 6,
-                    borderRadius: BorderRadius.circular(30),
-                    value: productData['value'],
-                    color: Theme.of(context).colorScheme.primary,
-                    backgroundColor: Colors.black12,
+                  child: Builder(
+                    builder: (context) {
+                      final int current =
+                          (productData['currentParticipant'] ?? 0) as int;
+                      final int max =
+                          (productData['maxParticipant'] ?? 0) as int;
+                      double value = 0;
+                      if (max > 0) {
+                        value = current / max;
+                      } else if (productData['value'] != null) {
+                        value = (productData['value'] as num).toDouble();
+                      }
+                      return LinearProgressIndicator(
+                        minHeight: 6,
+                        borderRadius: BorderRadius.circular(30),
+                        value: value.clamp(0, 1),
+                        color: Theme.of(context).colorScheme.primary,
+                        backgroundColor: Colors.black12,
+                      );
+                    },
                   ),
                 ),
                 SizedBox(width: 10),
@@ -118,7 +143,7 @@ class PatunganCard extends StatelessWidget {
                     Icon(Icons.access_time, color: Colors.grey, size: 18),
                     SizedBox(width: 6),
                     Text(
-                      'Ends ${productData['count_down']}',
+                      _buildCountdownText(),
                       style: Theme.of(
                         context,
                       ).textTheme.labelSmall?.copyWith(color: Colors.grey),
@@ -142,5 +167,28 @@ class PatunganCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _buildCountdownText() {
+    final dynamic endAt = productData['endAt'];
+    if (endAt is Timestamp) {
+      final diff = endAt.toDate().difference(DateTime.now());
+      if (diff.isNegative) {
+        return '00:00:00';
+      }
+      final hours = diff.inHours;
+      final minutes = diff.inMinutes.remainder(60);
+      final seconds = diff.inSeconds.remainder(60);
+      final hh = hours.toString().padLeft(2, '0');
+      final mm = minutes.toString().padLeft(2, '0');
+      final ss = seconds.toString().padLeft(2, '0');
+      return '$hh:$mm:$ss';
+    }
+    // Fallback ke string lama jika masih ada
+    final dynamic legacy = productData['count_down'];
+    if (legacy is String && legacy.isNotEmpty) {
+      return legacy;
+    }
+    return '--:--:--';
   }
 }

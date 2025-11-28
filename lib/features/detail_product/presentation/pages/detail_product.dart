@@ -184,7 +184,7 @@ class _DetailProductState extends State<DetailProduct> {
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Text(
-                                  widget.productData['label'],
+                                  "Only ${widget.productData['maxParticipant'] - widget.productData['currentParticipant']} Spots left",
                                   style: Theme.of(context).textTheme.labelSmall
                                       ?.copyWith(
                                         fontSize: 8,
