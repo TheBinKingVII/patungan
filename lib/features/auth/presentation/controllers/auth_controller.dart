@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -7,7 +8,6 @@ import 'package:patungan/features/auth/domain/entities/auth_user_entity.dart';
 import 'package:patungan/features/auth/domain/repositories/auth_repository.dart';
 import 'package:patungan/features/auth/domain/usecases/get_current_user.dart';
 import 'package:patungan/features/auth/domain/usecases/sign_in_with_google.dart';
-import 'package:patungan/screens/main_screen.dart';
 
 class AuthController extends GetxController {
   late final AuthRepository _repository;
@@ -25,25 +25,33 @@ class AuthController extends GetxController {
           AuthRemoteDataSourceImpl(
             firebaseAuth: FirebaseAuth.instance,
             googleSignIn: GoogleSignIn(),
+            firestore: FirebaseFirestore.instance,
           ),
         );
     _signInWithGoogle = SignInWithGoogle(_repository);
     _getCurrentUser = GetCurrentUser(_repository);
   }
 
-  Future<void> signInWithGoogle() async {
-    if (isSigningIn.value) return;
+  Future<bool> signInWithGoogle() async {
+    if (isSigningIn.value) return false;
     isSigningIn.value = true;
     try {
       await _signInWithGoogle();
-      Get.offAll(() => MainScreen());
-    } on FirebaseAuthException catch (e) {
-      Get.snackbar('Login gagal', e.message ?? 'Gagal masuk dengan Google.');
-    } catch (_) {
-      Get.snackbar('Login gagal', 'Terjadi kesalahan. Coba lagi.');
-    } finally {
       isSigningIn.value = false;
+      Get.snackbar('Login Succesfully', 'Berhasil masuk dengan Google.');
+      return true;
+    } on FirebaseAuthException catch (e) {
+      isSigningIn.value = false;
+      // Jangan tampilkan snackbar jika user membatalkan login
+      if (e.code != 'sign_in_canceled') {
+        Get.snackbar('Login gagal', e.message ?? 'Gagal masuk dengan Google.');
+      }
+    } catch (e) {
+      isSigningIn.value = false;
+      Get.snackbar('Login gagal cuy', e.toString());
+      print(e.toString());
     }
+    return false;
   }
 
   Future<AuthUserEntity?> getCurrentUser() async {
@@ -51,6 +59,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> signOut() async {
+    isSigningIn.value = false;
     await _repository.signOut();
   }
 

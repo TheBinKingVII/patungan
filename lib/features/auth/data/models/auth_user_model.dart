@@ -5,10 +5,10 @@ class AuthUserModel extends AuthUserEntity {
 
   factory AuthUserModel.fromFirebaseUser(user) {
     return AuthUserModel(
-      uid: user.id,
+      uid: user.uid,
       email: user.email,
       name: user.displayName,
-      photoUrl: user.photoUrl,
+      photoUrl: user.photoURL,
     );
   }
 }

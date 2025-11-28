@@ -7,6 +7,7 @@ import 'package:patungan/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:patungan/features/auth/presentation/widgets/elevated_button.dart';
 import 'package:patungan/features/auth/presentation/widgets/gradient_text_button.dart';
 import 'package:patungan/features/auth/presentation/widgets/social_login_column.dart';
+import 'package:patungan/screens/main_screen.dart';
 
 class RegisterPage extends GetView<AuthController> {
   const RegisterPage({super.key});
@@ -61,7 +62,12 @@ class RegisterPage extends GetView<AuthController> {
                               'assets/images/google_logo.svg',
                             ),
                           ),
-                          onPressed: controller.signInWithGoogle,
+                          onPressed: () async {
+                            final success = await controller.signInWithGoogle();
+                            if (success) {
+                              Get.offAll(() => MainScreen());
+                            }
+                          },
                         ),
                         const SizedBox(height: 20),
 
