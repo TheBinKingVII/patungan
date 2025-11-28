@@ -243,7 +243,7 @@ class _GroupbyPageState extends State<GroupbyPage> {
                                           const SizedBox(height: 6),
                                           Text(
                                             CurrencyFormat.convertToIdr(
-                                              deal.price,
+                                              deal.discount,
                                               0,
                                             ),
                                             style: Theme.of(context)
@@ -258,7 +258,7 @@ class _GroupbyPageState extends State<GroupbyPage> {
                                           ),
                                           Text(
                                             CurrencyFormat.convertToIdr(
-                                              deal.discount,
+                                              deal.price,
                                               0,
                                             ),
                                             style: Theme.of(context)

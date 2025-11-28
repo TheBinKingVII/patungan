@@ -36,7 +36,7 @@ class PatunganCard extends StatelessWidget {
                       ),
                       SizedBox(height: 6),
                       Text(
-                        CurrencyFormat.convertToIdr(productData['price'], 0),
+                        CurrencyFormat.convertToIdr(productData['discount'], 0),
                         style: Theme.of(context).textTheme.headlineSmall
                             ?.copyWith(
                               fontWeight: FontWeight.w700,
@@ -44,7 +44,7 @@ class PatunganCard extends StatelessWidget {
                             ),
                       ),
                       Text(
-                        CurrencyFormat.convertToIdr(productData['discount'], 0),
+                        CurrencyFormat.convertToIdr(productData['price'], 0),
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: Colors.grey.shade700,
                           decoration: TextDecoration.lineThrough,
@@ -80,7 +80,7 @@ class PatunganCard extends StatelessWidget {
                                 ),
                           ),
                           Text(
-                            '20%',
+                            "${((productData['price']! - productData['discount']!) / productData['price']! * 100).toStringAsFixed(0)}%",
                             style: Theme.of(context).textTheme.bodyMedium
                                 ?.copyWith(
                                   color: Colors.white,

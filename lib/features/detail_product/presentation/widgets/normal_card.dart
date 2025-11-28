@@ -38,7 +38,7 @@ class _NormalCardState extends State<NormalCard> {
             ),
             SizedBox(height: 8),
             Text(
-              'Harga per biji: ${CurrencyFormat.convertToIdr(widget.productData['discount'], 0)}',
+              'Harga per biji: ${CurrencyFormat.convertToIdr(widget.productData['price'], 0)}',
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
                 fontWeight: FontWeight.w500,
                 color: Colors.grey.shade600,
