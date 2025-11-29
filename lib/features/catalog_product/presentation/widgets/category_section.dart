@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/catalog_controller.dart';
+import 'package:patungan/features/category/presentation/pages/category_page.dart';
 
 class CategorySection extends StatelessWidget {
   const CategorySection({Key? key}) : super(key: key);
@@ -38,7 +39,19 @@ class CategorySection extends StatelessWidget {
                 final category = controller.categories[index];
                 
                 return GestureDetector(
-                  onTap: () => controller.selectCategory(index),
+                  onTap: () {
+                    controller.selectCategory(index); 
+
+                    // Cek judul kategorinya, kalau 'Groceries' langsung pindah halaman
+                    if (category['title'] == 'Groceries') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CategoryPage(),
+                        ),
+                      );
+                    }
+                  },
                   child: Container(
                     width: itemWidth,
                     margin: EdgeInsets.only(

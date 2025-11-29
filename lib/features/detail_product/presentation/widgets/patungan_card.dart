@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:patungan/core/utils/rupiah_format.dart';
 import 'package:patungan/features/category/presentation/widgets/join_button.dart';
+import 'package:patungan/features/groupbuy/presentation/pages/groupby_detailed.dart';
 
 class PatunganCard extends StatelessWidget {
   final Map<String, dynamic> productData;
@@ -154,7 +155,12 @@ class PatunganCard extends StatelessWidget {
             ),
             SizedBox(height: 8),
             JoinButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => GroupbyDetailedPage(productData: productData)),
+                    );
+              },
               label: 'Join Groups',
               textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: Colors.white,
